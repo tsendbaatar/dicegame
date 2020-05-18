@@ -7,6 +7,8 @@ var scores;
 
 //Toglogchiin eeljindee tsugluulj baigaa onoog hadgalah huvisagch
 var roundScore;
+
+var isGameOver;
 //Shoonii ali talaaraa buusniig hadgalah huvisagch heregtei, 1-6 utgiig ene huvisagchid sanamsargui uusgeh
 initGame();
 
@@ -37,18 +39,26 @@ function initGame() {
 document.querySelector(".btn-new").addEventListener("click", initGame);
 
 function shooshid() {
-  //sanamsargui toog gargah
-  var dice = Math.floor(Math.random() * 6) + 1;
+  if (isGameOver !== true) {
+    //sanamsargui toog gargah
+    var dice = Math.floor(Math.random() * 6) + 1;
 
-  diceDom.style.display = "block";
-  //buusan shoonii toog zurag deer gargah
-  diceDom.src = "dice-" + dice + ".png";
+    diceDom.style.display = "block";
+    //buusan shoonii toog zurag deer gargah
+    diceDom.src = "dice-" + dice + ".png";
 
-  if (dice !== 1) {
-    roundScore = roundScore + dice;
-    document.getElementById("current-" + activePlayer).textContent = roundScore;
+    if (dice !== 1) {
+      roundScore = roundScore + dice;
+      document.getElementById(
+        "current-" + activePlayer
+      ).textContent = roundScore;
+    } else {
+      nextplayer();
+    }
   } else {
-    nextplayer();
+    alert("Game finish. Start new game");
+
+    isGameOver = false;
   }
 }
 //Hold tovch
@@ -60,7 +70,8 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
   document.getElementById("score-" + activePlayer).textContent =
     scores[activePlayer];
 
-  if (scores[activePlayer] >= 10) {
+  if (scores[activePlayer] >= 100) {
+    isGameOver = true;
     document.getElementById("name-" + activePlayer).textContent = "Winner !!!";
     document
       .querySelector(".player-" + activePlayer + "-panel")
