@@ -1,27 +1,40 @@
+var diceDom = document.querySelector(".dice");
 // Toglogchiin eeljiig hadgalah huvisagch 1 toglogch 0, 2 toglogch 1
-var activePlayer = 0;
+var activePlayer;
 
 //Toglogchdiin tsugluulsan onoog tsugluulah huvisagch
-var scores = [0, 0];
+var scores;
 
 //Toglogchiin eeljindee tsugluulj baigaa onoog hadgalah huvisagch
-var roundScore = 0;
+var roundScore;
 //Shoonii ali talaaraa buusniig hadgalah huvisagch heregtei, 1-6 utgiig ene huvisagchid sanamsargui uusgeh
+initGame();
 
-//var dice1 = Math.floor(Math.random() * 6) + 1;
-//<div class="player-score" id="score-0">43</div>
+function initGame() {
+  activePlayer = 0;
+  scores = [0, 0];
+  roundScore = 0;
+  //var dice1 = Math.floor(Math.random() * 6) + 1;
+  //<div class="player-score" id="score-0">43</div>
+  document.querySelector(".player-0-panel").classList.add("active");
+  document.getElementById("name-0").textContent = "Player 1";
+  document.getElementById("name-1").textContent = "Player 2";
 
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").textContent = "0";
+  document.querySelector(".player-0-panel").classList.remove("winner");
+  document.querySelector(".player-1-panel").classList.remove("winner");
 
-var diceDom = document.querySelector(".dice");
+  document.getElementById("score-0").textContent = "0";
+  document.getElementById("score-1").textContent = "0";
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
 
-diceDom.style.display = "none";
+  diceDom.style.display = "none";
 
-document.querySelector(".btn-roll").addEventListener("click", shooshid);
-//console.log("Shoo :" + dice);
+  document.querySelector(".btn-roll").addEventListener("click", shooshid);
+  //console.log("Shoo :" + dice);
+}
+
+document.querySelector(".btn-new").addEventListener("click", initGame);
 
 function shooshid() {
   //sanamsargui toog gargah
